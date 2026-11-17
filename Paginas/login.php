@@ -5,7 +5,7 @@
 
   session_start();
   if(isset($_SESSION["logueado"])){
-    header("location:bienvenida.php");
+    header("location:Inicio.php");
   }
     
 ?>
@@ -128,7 +128,7 @@
 <div class="card">
   <h1>Iniciar sesión</h1>
 
-  <form id="loginForm" action="auth.php" method="post">
+  <form id="loginForm" action="auth2.php" method="post">
     <div class="field">
       <label for="email">Correo electrónico</label>
       <input type="text" id="email" name="usuario" placeholder="Nombre de usuario." required>

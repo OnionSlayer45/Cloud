@@ -4,10 +4,10 @@
     // iniciamos la conexión
     // los parámetros son: 
     // IP de la BD, Usuario, Pass, Nombre de la BD
-    require "infoconexion.php";
+    require "conexion.php";
     //$consulta1 = "insert into tablaprueba values({$matricula},'{$nombre}',{$edad});";
-    $consulta = "select * from tablaprueba;";
-    $resultado = mysqli_query($conexion, $consulta);
+    //$consulta = "select * from tablaprueba;";
+    //$resultado = mysqli_query($conexion, $consulta);
           
 ?>
 
@@ -112,9 +112,9 @@
   <select id="opcion" name="opcion" required>
     <option value="" disabled selected>Selecciona una opción</option>
       <?php
-          while($registro = mysqli_fetch_array($resultado)){
-              echo '<option value="'.$registro["matricula"].'">'.$registro["matricula"]." - ".$registro["nombre"].'</option>';
-          }
+          //while($registro = mysqli_fetch_array($resultado)){
+            //  echo '<option value="'.$registro["matricula"].'">'.$registro["matricula"]." - ".$registro["nombre"].'</option>';
+          //}
 
       ?>
   </select>

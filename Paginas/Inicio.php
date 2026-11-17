@@ -1,3 +1,16 @@
+<?php
+  //if(isset($_COOKIE["usuario"])){
+  //header("Location: auth.php");
+  //}
+
+  session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+  }
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,32 +74,32 @@
 
 <main>
   <!-- Cambia cada href por la ruta real de tu página -->
-  <a class="opcion alta" href="alta.html">
+  <a class="opcion alta" href="registrar.php">
     <div class="icono" aria-hidden="true">+</div>
     <h2>Agregar registro</h2>
     <p>Da de alta un nuevo registro.</p>
   </a>
-  <a class="opcion consulta" href="consulta.html">
+  <a class="opcion consulta" href="buscar.php">
     <div class="icono" aria-hidden="true">?</div>
     <h2>Consultar registros</h2>
     <p>Busca y revisa los registros existentes.</p>
   </a>
-  <a class="opcion cambio" href="cambio.html">
+  <a class="opcion cambio" href="actualizar.php">
     <div class="icono" aria-hidden="true">✎</div>
     <h2>Modificar registro</h2>
     <p>Actualiza los datos de un registro.</p>
   </a>
-  <a class="opcion baja" href="baja.html">
+  <a class="opcion baja" href="borrar.php">
     <div class="icono" aria-hidden="true">×</div>
     <h2>Eliminar registro</h2>
     <p>Borra un registro de forma definitiva.</p>
   </a>
-  <a class="opcion descarga" href="descarga.html">
+  <a class="opcion descarga" href="descargar.php">
     <div class="icono" aria-hidden="true">↓</div>
     <h2>Descargar archivos</h2>
     <p>Obtén los archivos disponibles.</p>
   </a>
-  <a class="opcion proceso" href="procesamiento.html">
+  <a class="opcion proceso" href="serverless.php">
     <div class="icono" aria-hidden="true">⚙</div>
     <h2>Procesar información</h2>
     <p>Envía datos a un formulario para procesarlos.</p>
