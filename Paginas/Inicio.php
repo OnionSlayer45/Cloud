@@ -5,11 +5,7 @@
     exit();
   }
   require "conexion.php";
-  // --- CONEXIÓN Y CONSULTA A LA BASE DE DATOS ---
-  // Descomenta y ajusta estas líneas con tus credenciales reales:
-  
-  //  $sql = "SELECT nombre, jugadores, duracion, genero imagen FROM juegos";
-  $sql = "SELECT * FROM juegos";
+  $sql = "SELECT nombre, genero, jugadores_min, jugadores_max, duracion_promedio, descripcion, imagen FROM juegos";
   $resultado = $conexion->query($sql);
 ?>
 
@@ -222,33 +218,33 @@
 
   <main>
     <?php
-      // --- BLOQUE PARA USAR CON TU BASE DE DATOS REAL ---
       if ($resultado && $resultado->num_rows > 0) {
-              while($juego = $resultado->fetch_assoc()) {
-                $imgUrl = !empty($juego["imagen"]) 
-                  ? $juego["imagen"] 
-                  : "https://placehold.co/600x400/dce5eb/17252f?text=" . urlencode($juego["nombre"]);
+        while ($juego = $resultado->fetch_assoc()) {
+          $nombre = $juego["nombre"] ?? '';
+          $imgUrl = trim($juego["imagen"] ?? '');
+          $jugadores = (int)($juego["jugadores_min"] ?? 0) . '–' . (int)($juego["jugadores_max"] ?? 0);
 
-                echo '<article class="juego-card">';
-                echo '  <img class="juego-img" src="' . htmlspecialchars($imgUrl) . '" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\'https://placehold.co/600x400/dce5eb/17252f?text=Sin+Imagen\';" alt="Portada de ' . htmlspecialchars($juego["titulo"] ?? $juego["nombre"]) . '">';
-                echo '  <div class="juego-body">';
-                echo '    <span class="juego-categoria">' . htmlspecialchars($juego["genero"] ?? '') . '</span>';
-                echo '    <h2 class="juego-titulo">' . htmlspecialchars($juego["nombre"] ?? '') . '</h2>';
-                echo '    <div class="juego-meta">';
-                echo '      <span>👥 ' . htmlspecialchars((string)($juego["jugadores"] ?? '')) . '</span>';
-                echo '      <span>⏱ ' . htmlspecialchars((string)($juego["duracion"] ?? '')) . ' min</span>';
-                echo '    </div>';
-                echo '    <p class="juego-desc">' . htmlspecialchars($juego["descripcion"] ?? '') . '</p>';
-                echo '  </div>';
-                echo '</article>';
-              }
-            } else {
-              echo '<p>No hay juegos de mesa registrados en la base de datos todavía.</p>';
-            }
+          echo '<article class="juego-card">';
+          if ($imgUrl !== '') {
+            echo '  <img class="juego-img" src="' . htmlspecialchars($imgUrl) . '" referrerpolicy="no-referrer" onerror="this.onerror=null;this.style.visibility=\'hidden\';" alt="Portada de ' . htmlspecialchars($nombre) . '">';
+          } else {
+            echo '  <div class="juego-img"></div>';
+          }
+          echo '  <div class="juego-body">';
+          echo '    <span class="juego-categoria">' . htmlspecialchars($juego["genero"] ?? '') . '</span>';
+          echo '    <h2 class="juego-titulo">' . htmlspecialchars($nombre) . '</h2>';
+          echo '    <div class="juego-meta">';
+          echo '      <span>👥 ' . htmlspecialchars($jugadores) . '</span>';
+          echo '      <span>⏱ ' . htmlspecialchars((string)($juego["duracion_promedio"] ?? '')) . ' min</span>';
+          echo '    </div>';
+          echo '    <p class="juego-desc">' . htmlspecialchars($juego["descripcion"] ?? '') . '</p>';
+          echo '  </div>';
+          echo '</article>';
+        }
+      } else {
+        echo '<p>No hay juegos de mesa registrados en la base de datos todavía.</p>';
+      }
       $conexion->close();
-      
-
-      // --- RENDERIZADO DE EJEMPLO (Elimina este foreach cuando actives el bloque de arriba) ---
     ?>
   </main>
 </body>

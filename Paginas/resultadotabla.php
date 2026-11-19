@@ -1,16 +1,17 @@
 <?php
 require "conexion.php";
- session_start();
-  if(!isset($_SESSION["logueado"])){
+session_start();
+if (!isset($_SESSION["logueado"])) {
     header("location:login.php");
     exit();
-  }
+}
 
-$nombre = $_POST["nombre"];
-$genero = $_POST["genero"];
-
-$consulta = "SELECT * FROM juegos WHERE nombre LIKE '%$nombre%' AND genero LIKE '%$genero%'";
-$resultado = mysqli_query($conexion, $consulta);
+$nombre = "%" . $_POST["nombre"] . "%";
+$genero = "%" . $_POST["genero"] . "%";
+$stmt = mysqli_prepare($conexion, "SELECT * FROM juegos WHERE nombre LIKE ? AND genero LIKE ?");
+mysqli_stmt_bind_param($stmt, "ss", $nombre, $genero);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,14 +31,20 @@ $resultado = mysqli_query($conexion, $consulta);
   <div class="tabla-scroll">
   <table>
     <tr>
-      <th>Nombre</th><th>Género</th><th>Jugadores</th><th>Duración</th><th>Acciones</th>
+      <th>Nombre</th><th>Género</th><th>Jugadores</th><th>Duración</th><th>Descripción</th><th>Imagen</th><th>Acciones</th>
     </tr>
     <?php while ($fila = mysqli_fetch_array($resultado)) { ?>
     <tr>
-      <td><?= $fila["nombre"] ?></td>
-      <td><?= $fila["genero"] ?></td>
-      <td><?= $fila["jugadores"] ?></td>
-      <td><?= $fila["duracion"] ?> min</td>
+      <td><?= htmlspecialchars($fila["nombre"]) ?></td>
+      <td><?= htmlspecialchars($fila["genero"]) ?></td>
+      <td><?= (int)$fila["jugadores_min"] ?>–<?= (int)$fila["jugadores_max"] ?></td>
+      <td><?= (int)$fila["duracion_promedio"] ?> min</td>
+      <td><?= htmlspecialchars($fila["descripcion"]) ?></td>
+      <td>
+        <?php if (!empty($fila["imagen"]) && preg_match('#^https?://#i', $fila["imagen"])) { ?>
+          <a href="<?= htmlspecialchars($fila["imagen"]) ?>" target="_blank" rel="noopener">Ver</a>
+        <?php } ?>
+      </td>
       <td>
         <form action="formcambios.php" method="post">
           <input type="hidden" name="opcion" value="<?= htmlspecialchars($fila["nombre"]) ?>">

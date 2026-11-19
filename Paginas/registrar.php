@@ -1,9 +1,10 @@
-<?php require "generos.php"; 
- session_start();
-  if(!isset($_SESSION["logueado"])){
+<?php
+require "generos.php";
+session_start();
+if (!isset($_SESSION["logueado"])) {
     header("location:login.php");
     exit();
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,18 +36,33 @@
     <label for="genero">Género</label>
     <select id="genero" name="genero" required>
       <option value="" disabled selected>Selecciona un género</option>
-      <?php foreach ($GENEROS as $g) { echo "<option>$g</option>"; } ?>
+      <?php foreach ($GENEROS as $g) { echo "<option>" . htmlspecialchars($g) . "</option>"; } ?>
     </select>
   </div>
 
   <div class="campo">
-    <label for="jugadores">Cantidad de jugadores</label>
-    <input type="number" id="jugadores" name="jugadores" min="1" required>
+    <label for="jugadores_min">Jugadores mínimos</label>
+    <input type="number" id="jugadores_min" name="jugadores_min" min="1" required>
   </div>
 
   <div class="campo">
-    <label for="duracion">Duración de la partida (minutos)</label>
-    <input type="number" id="duracion" name="duracion" min="1" required>
+    <label for="jugadores_max">Jugadores máximos</label>
+    <input type="number" id="jugadores_max" name="jugadores_max" min="1" required>
+  </div>
+
+  <div class="campo">
+    <label for="duracion_promedio">Duración promedio (minutos)</label>
+    <input type="number" id="duracion_promedio" name="duracion_promedio" min="1" required>
+  </div>
+
+  <div class="campo">
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+  </div>
+
+  <div class="campo">
+    <label for="imagen">Imagen (URL)</label>
+    <input type="url" id="imagen" name="imagen">
   </div>
 
   <button type="submit">Registrar</button>
