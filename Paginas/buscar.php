@@ -1,4 +1,9 @@
-<?php require "generos.php"; ?>
+<?php require "generos.php"; 
+ session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+    exit();
+  }?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

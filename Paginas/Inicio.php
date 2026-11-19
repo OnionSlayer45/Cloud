@@ -4,53 +4,12 @@
     header("location:login.php");
     exit();
   }
-
+  require "conexion.php";
   // --- CONEXIÓN Y CONSULTA A LA BASE DE DATOS ---
   // Descomenta y ajusta estas líneas con tus credenciales reales:
-  /*
-  $conexion = new mysqli("localhost", "root", "", "tu_base_de_datos");
-  if ($conexion->connect_error) {
-      die("Error de conexión: " . $conexion->connect_error);
-  }
-  $sql = "SELECT id, titulo, jugadores, duracion, categoria, descripcion, imagen FROM juegos_mesa ORDER BY titulo ASC";
+  
+  $sql = "SELECT nombre, jugadores, duracion, genero imagen FROM juegos";
   $resultado = $conexion->query($sql);
-  */
-
-  // Datos de ejemplo para visualizar el diseño mientras conectas tu BD
-  $juegos_ejemplo = [
-    [
-      "titulo" => "Catan",
-      "jugadores" => "3 - 4 jugadores",
-      "duracion" => "60 - 120 min",
-      "categoria" => "Estrategia / Comercio",
-      "descripcion" => "Coloniza la isla de Catan recolectando recursos, construyendo caminos y negociando con otros jugadores.",
-      "imagen" => "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=600&q=80"
-    ],
-    [
-      "titulo" => "Carcassonne",
-      "jugadores" => "2 - 5 jugadores",
-      "duracion" => "30 - 45 min",
-      "categoria" => "Colocación de losetas",
-      "descripcion" => "Construye un paisaje medieval paso a paso y despliega a tus seguidores como caballeros, monjes o ladrones.",
-      "imagen" => "https://images.unsplash.com/photo-1632501641765-e568d28b0015?auto=format&fit=crop&w=600&q=80"
-    ],
-    [
-      "titulo" => "Ticket to Ride",
-      "jugadores" => "2 - 5 jugadores",
-      "duracion" => "45 - 60 min",
-      "categoria" => "Familiar / Rutas",
-      "descripcion" => "Reclama rutas ferroviarias a lo largo del mapa para conectar ciudades y cumplir tus boletos de destino.",
-      "imagen" => "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&w=600&q=80"
-    ],
-    [
-      "titulo" => "Azul",
-      "jugadores" => "2 - 4 jugadores",
-      "duracion" => "30 - 45 min",
-      "categoria" => "Abstracto",
-      "descripcion" => "Compite por decorar las paredes del Palacio Real de Évora seleccionando cuidadosamente azulejos de colores.",
-      "imagen" => "https://images.unsplash.com/photo-1585504198199-20277593b94f?auto=format&fit=crop&w=600&q=80"
-    ]
-  ];
 ?>
 
 <!DOCTYPE html>
@@ -262,14 +221,14 @@
 
   <main>
     <?php
-      /* --- BLOQUE PARA USAR CON TU BASE DE DATOS REAL ---
+      // --- BLOQUE PARA USAR CON TU BASE DE DATOS REAL ---
       if ($resultado && $resultado->num_rows > 0) {
         while($juego = $resultado->fetch_assoc()) {
           echo '<article class="juego-card">';
           echo '  <img class="juego-img" src="' . htmlspecialchars($juego["imagen"]) . '" alt="Portada de ' . htmlspecialchars($juego["titulo"]) . '">';
           echo '  <div class="juego-body">';
-          echo '    <span class="juego-categoria">' . htmlspecialchars($juego["categoria"]) . '</span>';
-          echo '    <h2 class="juego-titulo">' . htmlspecialchars($juego["titulo"]) . '</h2>';
+          echo '    <span class="juego-categoria">' . htmlspecialchars($juego["genero"]) . '</span>';
+          echo '    <h2 class="juego-titulo">' . htmlspecialchars($juego["nombre"]) . '</h2>';
           echo '    <div class="juego-meta">';
           echo '      <span>👥 ' . htmlspecialchars($juego["jugadores"]) . '</span>';
           echo '      <span>⏱ ' . htmlspecialchars($juego["duracion"]) . '</span>';
@@ -282,25 +241,10 @@
         echo '<p>No hay juegos de mesa registrados en la base de datos todavía.</p>';
       }
       $conexion->close();
-      */
+      
 
       // --- RENDERIZADO DE EJEMPLO (Elimina este foreach cuando actives el bloque de arriba) ---
-      foreach ($juegos_ejemplo as $juego): 
     ?>
-      <article class="juego-card">
-        <img class="juego-img" src="<?= htmlspecialchars($juego['imagen']) ?>" alt="Portada de <?= htmlspecialchars($juego['titulo']) ?>">
-        <div class="juego-body">
-          <span class="juego-categoria"><?= htmlspecialchars($juego['categoria']) ?></span>
-          <h2 class="juego-titulo"><?= htmlspecialchars($juego['titulo']) ?></h2>
-          <div class="juego-meta">
-            <span>👥 <?= htmlspecialchars($juego['jugadores']) ?></span>
-            <span>⏱ <?= htmlspecialchars($juego['duracion']) ?></span>
-          </div>
-          <p class="juego-desc"><?= htmlspecialchars($juego['descripcion']) ?></p>
-        </div>
-      </article>
-    <?php endforeach; ?>
   </main>
-
 </body>
 </html>

@@ -1,6 +1,11 @@
 <?php
 require "conexion.php";
 require "generos.php";
+ session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+    exit();
+  }
 
 $original  = $_POST["opcion"];
 $resultado = mysqli_query($conexion, "SELECT * FROM juegos WHERE nombre = '$original'");

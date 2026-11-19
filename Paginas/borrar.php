@@ -1,6 +1,12 @@
 <?php
+ session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+    exit();
+  }
 require "conexion.php";
 $resultado = mysqli_query($conexion, "SELECT * FROM juegos");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

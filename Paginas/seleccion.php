@@ -1,8 +1,10 @@
 <?php
 
-    // iniciamos la conexión
-    // los parámetros son: 
-    // IP de la BD, Usuario, Pass, Nombre de la BD
+    session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+    exit();
+  }
     require "conexion.php";
     $consulta = "select * from tablaprueba;";
     $resultado = mysqli_query($conexion, $consulta);

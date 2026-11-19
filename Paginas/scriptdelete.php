@@ -1,5 +1,10 @@
 <?php
 require "conexion.php";
+ session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+    exit();
+  }
 
 $nombre = $_POST["opcion"];
 
