@@ -224,23 +224,27 @@
     <?php
       // --- BLOQUE PARA USAR CON TU BASE DE DATOS REAL ---
       if ($resultado && $resultado->num_rows > 0) {
-        while($juego = $resultado->fetch_assoc()) {
-          echo '<article class="juego-card">';
-          echo '  <img class="juego-img" src="' . htmlspecialchars($juego["imagen"]) . '" alt="Portada de ' . htmlspecialchars($juego["titulo"]) . '">';
-          echo '  <div class="juego-body">';
-          echo '    <span class="juego-categoria">' . htmlspecialchars($juego["genero"]) . '</span>';
-          echo '    <h2 class="juego-titulo">' . htmlspecialchars($juego["nombre"]) . '</h2>';
-          echo '    <div class="juego-meta">';
-          echo '      <span>👥 ' . htmlspecialchars($juego["jugadores"]) . '</span>';
-          echo '      <span>⏱ ' . htmlspecialchars($juego["duracion"]) . '</span>';
-          echo '    </div>';
-          echo '    <p class="juego-desc">' . htmlspecialchars($juego["descripcion"]) . '</p>';
-          echo '  </div>';
-          echo '</article>';
-        }
-      } else {
-        echo '<p>No hay juegos de mesa registrados en la base de datos todavía.</p>';
-      }
+              while($juego = $resultado->fetch_assoc()) {
+                $imgUrl = !empty($juego["imagen"]) 
+                  ? $juego["imagen"] 
+                  : "https://placehold.co/600x400/dce5eb/17252f?text=" . urlencode($juego["nombre"]);
+
+                echo '<article class="juego-card">';
+                echo '  <img class="juego-img" src="' . htmlspecialchars($imgUrl) . '" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\'https://placehold.co/600x400/dce5eb/17252f?text=Sin+Imagen\';" alt="Portada de ' . htmlspecialchars($juego["titulo"] ?? $juego["nombre"]) . '">';
+                echo '  <div class="juego-body">';
+                echo '    <span class="juego-categoria">' . htmlspecialchars($juego["genero"] ?? '') . '</span>';
+                echo '    <h2 class="juego-titulo">' . htmlspecialchars($juego["nombre"] ?? '') . '</h2>';
+                echo '    <div class="juego-meta">';
+                echo '      <span>👥 ' . htmlspecialchars((string)($juego["jugadores"] ?? '')) . '</span>';
+                echo '      <span>⏱ ' . htmlspecialchars((string)($juego["duracion"] ?? '')) . ' min</span>';
+                echo '    </div>';
+                echo '    <p class="juego-desc">' . htmlspecialchars($juego["descripcion"] ?? '') . '</p>';
+                echo '  </div>';
+                echo '</article>';
+              }
+            } else {
+              echo '<p>No hay juegos de mesa registrados en la base de datos todavía.</p>';
+            }
       $conexion->close();
       
 
