@@ -8,7 +8,8 @@
   // --- CONEXIÓN Y CONSULTA A LA BASE DE DATOS ---
   // Descomenta y ajusta estas líneas con tus credenciales reales:
   
-  $sql = "SELECT nombre, jugadores, duracion, genero imagen FROM juegos";
+  //  $sql = "SELECT nombre, jugadores, duracion, genero imagen FROM juegos";
+  $sql = "SELECT * FROM juegos";
   $resultado = $conexion->query($sql);
 ?>
 
