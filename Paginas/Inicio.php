@@ -203,7 +203,7 @@
       <a class="btn-nav baja" href="borrar.php" title="Borra un juego de forma definitiva">
         <span aria-hidden="true">×</span> Eliminar
       </a>
-      <a class="btn-nav descarga" href="descargar.php" title="Obtén los archivos disponibles">
+      <a class="btn-nav descarga" href="archivos.php" title="Obtén los archivos disponibles">
         <span aria-hidden="true">↓</span> Descargar
       </a>
       <a class="btn-nav proceso" href="serverless.php" title="Procesar información">
