@@ -1,5 +1,6 @@
 <?php    
     // los parámetros son: 
+    require "conexion.php";
     $matricula = $_POST["matricula"];
     $nombre = $_POST["nombre"];
     $edad = $_POST["edad"];

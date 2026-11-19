@@ -1,3 +1,14 @@
+<?php
+  //if(isset($_COOKIE["usuario"])){
+  //header("Location: auth.php");
+  //}
+
+  session_start();
+  if(!isset($_SESSION["logueado"])){
+    header("location:login.php");
+  }
+    
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -83,7 +94,7 @@
 
 <body>
 
-    <form class="formulario" action="basesdatosconphp.php" method="post">
+    <form class="formulario" action="/Paginas/DB/registrar.php" method="post">
 
         <h1>Registro de estudiante</h1>
 

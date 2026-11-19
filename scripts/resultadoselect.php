@@ -2,7 +2,7 @@
     // atrapamos info del formulario
     $nombre = $_POST["nombre"];
 
-    
+    require "conexion.php";
 
     // iniciamos la conexión
     // los parámetros son: 

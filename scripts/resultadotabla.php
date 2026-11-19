@@ -1,5 +1,6 @@
 
 <?php
+require "conexion.php";
 
     // atrapamos info del formulario
     $nombre = $_POST["nombre"];

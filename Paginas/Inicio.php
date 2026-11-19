@@ -104,6 +104,9 @@
     <h2>Procesar información</h2>
     <p>Envía datos a un formulario para procesarlos.</p>
   </a>
+    <a class="logout" href="cerrarsesion.php">Cerrar sesión</a>
+
+  
 </main>
 </body>
 </html>

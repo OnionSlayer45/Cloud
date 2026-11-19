@@ -1,6 +1,7 @@
 <?php    
 
     # atrapo datos del formulario
+    require "conexion.php";
     $matricula = $_POST["opcion"];
 
     // los parámetros son: 

@@ -8,8 +8,15 @@
     $usuario_usuario =$_POST["usuario"];
     $pass = $_POST["password"];
     }
-    $uscor = "Martin";
-    $pascor = "1234";
+
+    $conexion = mysqli_connect("localhost", "root", "mikivine", "Proyecto");
+    //$consulta1 = "insert into tablaprueba values({$matricula},'{$nombre}',{$edad});";
+    $consulta = "SELECT * FROM `usuarios` WHERE `Usuario`= 'Martin';";
+    $resultado = mysqli_query($conexion, $consulta);
+    $registro = mysqli_fetch_array($resultado);
+    $uscor = $registro["Usuario"];
+    $pascor = $registro["Contraseña"];
+
 
     if (($uscor == $usuario_usuario) && ($pascor==$pass)){
         session_start();
