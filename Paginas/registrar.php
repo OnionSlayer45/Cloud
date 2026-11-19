@@ -11,6 +11,15 @@
 <form class="formulario" action="scriptregistrar.php" method="post">
   <h1>Registrar juego de mesa</h1>
 
+  <?php
+  if (isset($_GET["msj"])) {
+      echo '<p class="mensaje">Juego registrado con éxito</p>';
+  }
+  if (isset($_GET["error"])) {
+      echo '<p class="mensaje error">Error: ' . htmlspecialchars($_GET["error"]) . '</p>';
+  }
+  ?>
+
   <div class="campo">
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre" name="nombre" required>

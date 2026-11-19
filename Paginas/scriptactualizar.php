@@ -8,5 +8,11 @@ $jugadores = $_POST["jugadores"];
 $duracion  = $_POST["duracion"];
 
 $consulta = "UPDATE juegos SET nombre = '$nombre', genero = '$genero',
-              jugadores = $jugadores, duracion = $duracion
-              WHERE nombre = '$original'";
+             jugadores = $jugadores, duracion = $duracion
+             WHERE nombre = '$original'";
+
+if(mysqli_query($conexion, $consulta)) {
+    header("Location: actualizar.php?msj=1");
+}
+
+exit;

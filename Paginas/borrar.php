@@ -13,6 +13,15 @@ $resultado = mysqli_query($conexion, "SELECT * FROM juegos");
 <body>
 <form class="formulario" action="scriptdelete.php" method="post" onsubmit="return confirm('¿Seguro que quieres borrar este juego?');">
   <h1>Borrar juego</h1>
+
+  <?php
+  if (isset($_GET["msj"])) {
+      echo '<p class="mensaje">Juego borrado con éxito</p>';
+  }
+  if (isset($_GET["error"])) {
+      echo '<p class="mensaje error">Error: ' . htmlspecialchars($_GET["error"]) . '</p>';
+  }
+  ?>
   <p class="ayuda">Elige un juego de la lista y presiona Borrar.</p>
 
   <div class="campo">

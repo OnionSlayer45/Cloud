@@ -13,6 +13,15 @@ $resultado = mysqli_query($conexion, "SELECT * FROM juegos");
 <body>
 <form class="formulario" action="formcambios.php" method="post">
   <h1>Cambiar datos de un juego</h1>
+
+  <?php
+  if (isset($_GET["msj"])) {
+      echo '<p class="mensaje">Juego actualizado con éxito</p>';
+  }
+  if (isset($_GET["error"])) {
+      echo '<p class="mensaje error">Error: ' . htmlspecialchars($_GET["error"]) . '</p>';
+  }
+  ?>
   <p class="ayuda">Elige un juego de la lista y presiona Cambiar.</p>
 
   <div class="campo">
