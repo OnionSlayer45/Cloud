@@ -1,3 +1,3 @@
 <?php
-$conexion=mysqli_connect();
+$conexion=mysqli_connect("localhost","root","mikivine","Proyecto");
 ?>

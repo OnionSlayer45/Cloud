@@ -1,0 +1,54 @@
+:root {
+  --fondo: #eef2f6;
+  --tarjeta: #ffffff;
+  --texto: #1c2b39;
+  --suave: #5b6b7a;
+  --borde: #c5d0db;
+  --acento: #1f6f8b;
+  --acento-oscuro: #17556b;
+  --peligro: #a63a3a;
+  --exito: #1e6b43;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1rem;
+  background: var(--fondo); color: var(--texto);
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+.formulario, .contenedor {
+  width: 100%; max-width: 420px; background: var(--tarjeta);
+  border: 1px solid var(--borde); border-radius: 10px; padding: 2rem;
+}
+.contenedor { max-width: 860px; }
+h1 { margin: 0 0 .25rem; font-size: 1.4rem; }
+p.ayuda { margin: 0 0 1.5rem; color: var(--suave); font-size: .95rem; }
+.campo { margin-bottom: 1.1rem; }
+label { display: block; margin-bottom: .4rem; font-weight: 600; }
+input, select {
+  width: 100%; padding: .7rem .8rem; font-size: 1rem; color: var(--texto);
+  background: #fff; border: 1px solid var(--borde); border-radius: 6px;
+}
+input:focus, select:focus, button:focus-visible, a:focus-visible {
+  outline: 3px solid rgba(31, 111, 139, .35); outline-offset: 1px; border-color: var(--acento);
+}
+button, .boton {
+  display: inline-block; width: 100%; padding: .8rem; font-size: 1rem; font-weight: 600;
+  text-align: center; text-decoration: none; color: #fff; background: var(--acento);
+  border: none; border-radius: 6px; cursor: pointer; transition: background .15s;
+}
+button:hover, .boton:hover { background: var(--acento-oscuro); }
+button:active { transform: translateY(1px); }
+.peligro { background: var(--peligro); }
+.peligro:hover { background: #812b2b; }
+.mensaje { margin: 1rem 0 0; font-weight: 600; color: var(--exito); }
+.mensaje.error { color: var(--peligro); }
+.enlaces { margin-top: 1rem; text-align: center; font-size: .95rem; }
+.enlaces a { color: var(--acento); }
+.tabla-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: .65rem .7rem; text-align: left; border-bottom: 1px solid var(--borde); }
+th { background: var(--fondo); }
+td form { display: inline; }
+td button { width: auto; padding: .4rem .8rem; font-size: .9rem; }
+.secundario { margin-top: .7rem; background: var(--tarjeta); color: var(--acento); border: 1px solid var(--acento); }
+.secundario:hover { background: var(--fondo); }
